@@ -1,0 +1,53 @@
+from django.urls import path, include
+from .views import *
+
+urlpatterns = [
+    path(
+        'producer/create/',
+        ProducerCreateView.as_view()
+    ),
+    path(
+        'producer/detail/<int:pk>',
+        ProducerDetailView.as_view()
+    ),
+    path(
+        'producer/list/',
+        ProducerListView.as_view()
+    ),
+    path(
+        'genre/create/',
+        GenreCreateView.as_view()
+    ),
+    path(
+        'genre/detail/<int:pk>',
+        GenreDetailView.as_view()
+    ),
+    path(
+        'genre/list/',
+        GenreListView.as_view()
+    ),
+    path(
+        'film/create/',
+        FilmCreateView.as_view()
+    ),
+    path(
+        'film/detail/<int:pk>',
+        FilmDetailView.as_view()
+    ),
+    path(
+        'film/list/',
+        FilmListView.as_view()
+    ),
+    path(
+        'rating/create/',
+        RatingCreateView.as_view()
+    ),
+    path(
+        'rating/detail/<int:pk>/',
+        RatingDetailView.as_view()
+    ),
+    path(
+        'rating/list/',
+        RatingCreateView.as_view()
+    ),
+]
