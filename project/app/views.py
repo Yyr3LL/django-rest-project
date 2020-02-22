@@ -11,14 +11,14 @@ class ProducerCreateView(generics.CreateAPIView):
 
 class ProducerDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProducerDetailSerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser, IsOwnerOrReadOnly)
 
     def get_queryset(self):
         return Producer.objects.all()
 
 
 class ProducerListView(generics.ListAPIView):
-    serializer_class = ProducerDetailSerializer
+    serializer_class = ProducerListSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
@@ -39,20 +39,46 @@ class GenreDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class GenreListView(generics.ListAPIView):
-    serializer_class = GenreDetailSerializer
+    serializer_class = GenreListSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         return Genre.objects.all()
 
 
+class ProducerPreferencesCreateView(generics.CreateAPIView):
+    serializer_class = ProducerPreferencesSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+
+class ProducerPreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ProducerPreferencesSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+    def get_queryset(self):
+        return ProducerPreferences.objects.all()
+
+
+class GenrePreferencesCreateView(generics.CreateAPIView):
+    serializer_class = GenrePreferencesSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+
+class GenrePreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = GenrePreferencesSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+    def get_queryset(self):
+        return GenrePreferences.objects.all()
+
+
 class FilmCreateView(generics.CreateAPIView):
-    serializer_class = FilmDetailSerializer
+    serializer_class = FilmSerializer
     permission_classes = (IsAuthenticated, )
 
 
 class FilmDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = FilmDetailSerializer
+    serializer_class = FilmSerializer
     permission_classes = (IsOwnerOrReadOnly, )
 
     def get_queryset(self):
@@ -60,7 +86,7 @@ class FilmDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class FilmListView(generics.ListAPIView):
-    serializer_class = Film
+    serializer_class = FilmSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
@@ -68,12 +94,12 @@ class FilmListView(generics.ListAPIView):
 
 
 class RatingCreateView(generics.CreateAPIView):
-    serializer_class = RatingDetailSerializer
+    serializer_class = RatingSerializer
     permission_classes = (IsOwnerOrReadOnly, IsAdminUser)
 
 
 class RatingDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = RatingDetailSerializer
+    serializer_class = RatingSerializer
     permission_classes = (IsOwnerOrReadOnly, IsAdminUser)
 
     def get_queryset(self):
@@ -81,7 +107,7 @@ class RatingDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class RatingListView(generics.ListAPIView):
-    serializer_class = RatingDetailSerializer
+    serializer_class = RatingSerializer
     # permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):

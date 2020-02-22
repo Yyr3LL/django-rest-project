@@ -2,12 +2,28 @@ from rest_framework import serializers
 from .models import *
 
 
+class ProducerListSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Producer
+        fields = ("name", "user")
+
+
 class ProducerDetailSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Producer
         fields = "__all__"
+
+
+class GenreListSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Genre
+        fields = ("name", "user")
 
 
 class GenreDetailSerializer(serializers.ModelSerializer):
@@ -18,29 +34,29 @@ class GenreDetailSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class FilmDetailSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class ProducerPreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProducerPreferences
+        fields = "__all__"
+
+
+class GenrePreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GenrePreferences
+        fields = "__all__"
+
+
+class FilmSerializer(serializers.ModelSerializer):
+    # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Film
         fields = "__all__"
 
 
-class FilmListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Film
-        fields = "__all__"
-
-
-class RatingDetailSerializer(serializers.ModelSerializer):
+class RatingSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-    class Meta:
-        model = Rating
-        fields = "__all__"
-
-
-class RatingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = "__all__"

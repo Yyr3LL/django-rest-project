@@ -6,10 +6,38 @@ User = get_user_model()
 
 class Producer(models.Model):
     name = models.CharField(max_length=100)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="producers"
+    )
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="genres"
+    )
+
+
+class ProducerPreferences(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="producer_preferences"
+    )
+    user_preference = models.ManyToManyField(Producer)
+
+
+class GenrePreferences(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="genre_preferences"
+    )
+    user_preference = models.ManyToManyField(Genre)
 
 
 class Film(models.Model):
@@ -19,11 +47,15 @@ class Film(models.Model):
         on_delete=models.CASCADE,
         related_name="films"
     )
-    genre = models.ForeignKey(
+    genre = models.ManyToManyField(
         Genre,
-        on_delete=models.CASCADE,
         related_name="films"
     )
+    # user = models.ForeignKey(
+    #     User,
+    #     on_delete=models.CASCADE,
+    #     related_name="films"
+    # )
 
 
 class Rating(models.Model):
