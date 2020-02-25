@@ -35,12 +35,20 @@ urlpatterns = [
         ProducerPreferencesDetailView.as_view()
     ),
     path(
+        'producer/preferences/get/',
+        ProducerPreferencesRetrieveView.as_view()
+    ),
+    path(
         'genre/preferences/create/',
         GenrePreferencesCreateView.as_view()
     ),
     path(
         'genre/preferences/detail/<int:pk>/',
         GenrePreferencesDetailView.as_view()
+    ),
+    path(
+        'genre/preferences/get/',
+        GenrePreferencesRetrieveView.as_view()
     ),
     path(
         'film/create/',

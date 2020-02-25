@@ -6,20 +6,10 @@ User = get_user_model()
 
 class Producer(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="producers"
-    )
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="genres"
-    )
 
 
 class ProducerPreferences(models.Model):
@@ -51,11 +41,6 @@ class Film(models.Model):
         Genre,
         related_name="films"
     )
-    # user = models.ForeignKey(
-    #     User,
-    #     on_delete=models.CASCADE,
-    #     related_name="films"
-    # )
 
 
 class Rating(models.Model):

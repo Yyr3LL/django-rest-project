@@ -3,44 +3,40 @@ from .models import *
 
 
 class ProducerListSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
     class Meta:
         model = Producer
         fields = ("name", "user")
 
 
 class ProducerDetailSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
     class Meta:
         model = Producer
         fields = "__all__"
 
 
 class GenreListSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
     class Meta:
         model = Genre
-        fields = ("name", "user")
+        fields = "__all__"
 
 
 class GenreDetailSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
     class Meta:
         model = Genre
         fields = "__all__"
 
 
 class ProducerPreferencesSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = ProducerPreferences
         fields = "__all__"
 
 
 class GenrePreferencesSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = GenrePreferences
         fields = "__all__"
