@@ -12,22 +12,14 @@ class Genre(models.Model):
     name = models.CharField(max_length=50)
 
 
-class ProducerPreferences(models.Model):
+class UserPreferences(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         related_name="producer_preferences"
     )
-    user_preference = models.ManyToManyField(Producer)
-
-
-class GenrePreferences(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="genre_preferences"
-    )
-    user_preference = models.ManyToManyField(Genre)
+    genre_preferences = models.ManyToManyField(Genre)
+    producer_preferences = models.ManyToManyField(Producer)
 
 
 class Film(models.Model):

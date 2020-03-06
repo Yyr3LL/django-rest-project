@@ -2,6 +2,7 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
+    # PRODUCER VIEWS
     path(
         'producer/create/',
         ProducerCreateView.as_view()
@@ -14,6 +15,7 @@ urlpatterns = [
         'producer/list/',
         ProducerListView.as_view()
     ),
+    # GENRES VIEWS
     path(
         'genre/create/',
         GenreCreateView.as_view()
@@ -26,30 +28,20 @@ urlpatterns = [
         'genre/list/',
         GenreListView.as_view()
     ),
+    # PREFERENCES VIEWS
     path(
-        'producer/preferences/create/',
-        ProducerPreferencesCreateView.as_view()
+        'preferences/create/',
+        UserPreferencesCreateView.as_view()
     ),
     path(
-        'producer/preferences/detail/<int:pk>/',
-        ProducerPreferencesDetailView.as_view()
+        'preferences/detail/<int:pk>/',
+        UserPreferencesDetailView.as_view()
     ),
     path(
-        'producer/preferences/get/',
-        ProducerPreferencesRetrieveView.as_view()
+        'preferences/get/',
+        UserPreferencesRetrieveView.as_view()
     ),
-    path(
-        'genre/preferences/create/',
-        GenrePreferencesCreateView.as_view()
-    ),
-    path(
-        'genre/preferences/detail/<int:pk>/',
-        GenrePreferencesDetailView.as_view()
-    ),
-    path(
-        'genre/preferences/get/',
-        GenrePreferencesRetrieveView.as_view()
-    ),
+    #"""FILM VIEWS"""
     path(
         'film/create/',
         FilmCreateView.as_view()
@@ -62,6 +54,7 @@ urlpatterns = [
         'film/list/',
         FilmListView.as_view()
     ),
+    # RATINGS VIEWS
     path(
         'rating/create/',
         RatingCreateView.as_view()

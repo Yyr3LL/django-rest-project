@@ -5,12 +5,12 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class ProducerCreateView(generics.CreateAPIView):
-    serializer_class = ProducerDetailSerializer
+    serializer_class = ProducerSerializer
     permission_classes = (IsAdminUser, )
 
 
 class ProducerDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ProducerDetailSerializer
+    serializer_class = ProducerSerializer
     permission_classes = (IsAdminUser, )
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class ProducerDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ProducerListView(generics.ListAPIView):
-    serializer_class = ProducerListSerializer
+    serializer_class = ProducerSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
@@ -26,12 +26,12 @@ class ProducerListView(generics.ListAPIView):
 
 
 class GenreCreateView(generics.CreateAPIView):
-    serializer_class = GenreDetailSerializer
+    serializer_class = GenreSerializer
     permission_classes = (IsAdminUser, )
 
 
 class GenreDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = GenreDetailSerializer
+    serializer_class = GenreSerializer
     permission_classes = (IsAdminUser, )
 
     def get_queryset(self):
@@ -39,53 +39,32 @@ class GenreDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class GenreListView(generics.ListAPIView):
-    serializer_class = GenreListSerializer
+    serializer_class = GenreSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         return Genre.objects.all()
 
 
-class ProducerPreferencesCreateView(generics.CreateAPIView):
-    serializer_class = ProducerPreferencesSerializer
+class UserPreferencesCreateView(generics.CreateAPIView):
+    serializer_class = UserPreferencesSerializer
     permission_classes = (IsAuthenticated, )
 
 
-class ProducerPreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ProducerPreferencesSerializer
-    permission_classes = (IsOwnerOrReadOnly, IsAdminUser)
-
-    def get_queryset(self):
-        return ProducerPreferences.objects.all()
-
-
-class ProducerPreferencesRetrieveView(generics.ListAPIView):
-    serializer_class = ProducerPreferencesSerializer
-    permission_classes = (IsAuthenticated, )
-
-    def get_queryset(self):
-        return ProducerPreferences.objects.filter(user=self.request.user)
-
-
-class GenrePreferencesCreateView(generics.CreateAPIView):
-    serializer_class = GenrePreferencesSerializer
-    permission_classes = (IsAuthenticated, )
-
-
-class GenrePreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = GenrePreferencesSerializer
+class UserPreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserPreferencesSerializer
     permission_classes = (IsOwnerOrReadOnly, )
 
     def get_queryset(self):
-        return GenrePreferences.objects.all()
+        return UserPreferences.objects.filter(user=self.request.user)
 
 
-class GenrePreferencesRetrieveView(generics.ListAPIView):
-    serializer_class = GenrePreferencesSerializer
+class UserPreferencesRetrieveView(generics.ListAPIView):
+    serializer_class = UserPreferencesSerializer
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return GenrePreferences.objects.filter(user=self.request.user)
+        return UserPreferences.objects.filter(user=self.request.user)
 
 
 class FilmCreateView(generics.CreateAPIView):
@@ -111,7 +90,7 @@ class FilmListView(generics.ListAPIView):
 
 class RatingCreateView(generics.CreateAPIView):
     serializer_class = RatingSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (IsAuthenticated, )
 
 
 class RatingDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -119,12 +98,12 @@ class RatingDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwnerOrReadOnly, IsAdminUser)
 
     def get_queryset(self):
-        return Rating.objects.all()
+        return Rating.objects.filter(user=self.request.user)
 
 
 class RatingListView(generics.ListAPIView):
     serializer_class = RatingSerializer
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
         return Rating.objects.all()
