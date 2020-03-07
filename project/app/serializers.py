@@ -2,12 +2,6 @@ from rest_framework import serializers
 from .models import *
 
 
-class ProducerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Producer
-        fields = "__all__"
-
-
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
@@ -22,11 +16,9 @@ class UserPreferencesSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class FilmSerializer(serializers.ModelSerializer):
-    # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
+class MovieSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Film
+        model = Movie
         fields = "__all__"
 
 

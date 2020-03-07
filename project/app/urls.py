@@ -2,20 +2,6 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns = [
-    # PRODUCER VIEWS
-    path(
-        'producer/create/',
-        ProducerCreateView.as_view()
-    ),
-    path(
-        'producer/detail/<int:pk>',
-        ProducerDetailView.as_view()
-    ),
-    path(
-        'producer/list/',
-        ProducerListView.as_view()
-    ),
-    # GENRES VIEWS
     path(
         'genre/create/',
         GenreCreateView.as_view()
@@ -41,18 +27,18 @@ urlpatterns = [
         'preferences/get/',
         UserPreferencesRetrieveView.as_view()
     ),
-    #"""FILM VIEWS"""
+    #FILM VIEWS
     path(
         'film/create/',
-        FilmCreateView.as_view()
+        MovieCreateView.as_view()
     ),
     path(
         'film/detail/<int:pk>',
-        FilmDetailView.as_view()
+        MovieDetailView.as_view()
     ),
     path(
         'film/list/',
-        FilmListView.as_view()
+        MovieListView.as_view()
     ),
     # RATINGS VIEWS
     path(

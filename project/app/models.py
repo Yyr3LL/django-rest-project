@@ -4,10 +4,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class Producer(models.Model):
-    name = models.CharField(max_length=100)
-
-
 class Genre(models.Model):
     name = models.CharField(max_length=50)
 
@@ -18,34 +14,33 @@ class UserPreferences(models.Model):
         on_delete=models.CASCADE,
         related_name="producer_preferences"
     )
-    genre_preferences = models.ManyToManyField(Genre)
-    producer_preferences = models.ManyToManyField(Producer)
+    genre_preferences = models.ManyToManyField(Genre, null=True)
 
 
-class Film(models.Model):
+class Movie(models.Model):
     title = models.CharField(max_length=100)
-    producer = models.ForeignKey(
-        Producer,
-        on_delete=models.CASCADE,
-        related_name="films"
-    )
     genre = models.ManyToManyField(
         Genre,
-        related_name="films"
+        related_name="films",
+        null=True
     )
+    imdb = models.IntegerField()
+    tmdb = models.IntegerField()
 
 
 class Rating(models.Model):
     value = models.IntegerField()
     film = models.ForeignKey(
-        Film,
+        Movie,
         on_delete=models.CASCADE,
-        related_name="ratings"
+        related_name="ratings",
+        null=True
     )
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="ratings"
+        related_name="ratings",
+        null=True
     )
 
     class Meta:
