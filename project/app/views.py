@@ -25,27 +25,6 @@ class GenreListView(generics.ListAPIView):
         return Genre.objects.all()
 
 
-class UserPreferencesCreateView(generics.CreateAPIView):
-    serializer_class = UserPreferencesSerializer
-    permission_classes = (IsAuthenticated, )
-
-
-class UserPreferencesDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserPreferencesSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
-
-    def get_queryset(self):
-        return UserPreferences.objects.all()
-
-
-class UserPreferencesRetrieveView(generics.ListAPIView):
-    serializer_class = UserPreferencesSerializer
-    permission_classes = (IsAuthenticated, )
-
-    def get_queryset(self):
-        return UserPreferences.objects.all()
-
-
 class MovieCreateView(generics.CreateAPIView):
     serializer_class = MovieSerializer
     permission_classes = (IsAuthenticated, )

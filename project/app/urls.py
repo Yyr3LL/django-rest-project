@@ -15,18 +15,6 @@ urlpatterns = [
         GenreListView.as_view()
     ),
     # PREFERENCES VIEWS
-    path(
-        'preferences/create/',
-        UserPreferencesCreateView.as_view()
-    ),
-    path(
-        'preferences/detail/<int:pk>/',
-        UserPreferencesDetailView.as_view()
-    ),
-    path(
-        'preferences/get/',
-        UserPreferencesRetrieveView.as_view()
-    ),
     #FILM VIEWS
     path(
         'film/create/',

@@ -8,14 +8,6 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserPreferencesSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = UserPreferences
-        fields = "__all__"
-
-
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie

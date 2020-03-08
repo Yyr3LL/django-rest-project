@@ -1,19 +1,13 @@
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from django.db import models
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
 
 
-class UserPreferences(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="producer_preferences"
-    )
+class User(AbstractUser):
     genre_preferences = models.ManyToManyField(Genre, null=True)
 
 
@@ -37,7 +31,7 @@ class Rating(models.Model):
         null=True
     )
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="ratings",
         null=True
@@ -45,3 +39,5 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ['film', 'user']
+
+
