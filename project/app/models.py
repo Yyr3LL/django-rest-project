@@ -18,8 +18,9 @@ class Movie(models.Model):
         related_name="films",
         null=True
     )
-    imdb = models.IntegerField()
-    tmdb = models.IntegerField()
+    imdb = models.IntegerField(default=0)
+    tmdb = models.IntegerField(default=0)
+    dataset_id = models.IntegerField()
 
 
 class Rating(models.Model):
