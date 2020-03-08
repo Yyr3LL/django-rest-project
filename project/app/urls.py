@@ -3,6 +3,10 @@ from .views import *
 
 urlpatterns = [
     path(
+        'preferences/set/',
+        UserPreferencesSetView.as_view()
+    ),
+    path(
         'genre/create/',
         GenreCreateView.as_view()
     ),

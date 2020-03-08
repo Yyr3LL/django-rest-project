@@ -1,7 +1,22 @@
 from rest_framework import generics, mixins
 from .serializers import *
-from .permissions import IsOwnerOrReadOnly
+from .permissions import *
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
+
+class UserPreferencesSetView(generics.RetrieveAPIView,
+                             mixins.UpdateModelMixin):
+    serializer_class = UserPreferencesSerializer
+    permission_classes = (UserIsOwnerOrReadOnly, )
+
+    def get_object(self):
+        username = self.request.user
+        obj = get_object_or_404(User, username=username)
+        return obj
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
 
 class GenreCreateView(generics.CreateAPIView):

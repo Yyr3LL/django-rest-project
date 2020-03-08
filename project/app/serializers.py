@@ -2,6 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 
+class UserPreferencesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("genre_preferences", )
+
+
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
